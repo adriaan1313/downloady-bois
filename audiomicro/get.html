@@ -14,17 +14,15 @@
 	function getThem(){
 		let pub=document.getElementById("pub").value;
 		$.get('https://api.allorigins.win/get?url=' + encodeURIComponent(pub), d=>{
-			if(typeof(d)=="object")d=d.contents;//sometimes jquery is weird, sometimes not
+			if(typeof(d)=="object")d=d.contents;
 			t=d.split('"twitter:description" content="')[1].split('">')[0];
 			c=d.split('"twitter:player:stream:content_type" content="')[1].split('">')[0]
-			//if(d.indexOf("/tracks/download/")) addAud("https://www.audiomicro.com/tracks/download/"+d.split("/tracks/download/")[1].split('"')[0], t, ""); doesn't actually work, bc you need to sign in and cors but for free music/sounds just make an account and download it for hq audio and suff
 			else addAud(d.split('"twitter:player:stream" content="')[1].split('">')[0], t, c);
 		});
 	}
 	function addAud(url, t, c){
 		let tmp=document.createElement("audio");
 		tmp.controls="on";
-		
 		let srt=document.createElement("source");
 		srt.src=url;
 		srt.type=c;
