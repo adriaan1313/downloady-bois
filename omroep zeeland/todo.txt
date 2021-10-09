@@ -1,3 +1,0 @@
-zoeken nieuws *: https://www.omroepzeeland.nl/zoeken/Results?query=%2A&from=&to=&page=1&searchItemType=NewsItem
-https://www.omroepzeeland.nl/media/37596/Naakt-2015-de-laatste-dag https://www.omroepzeeland.nl/weer ed fixen 
-(https://omroepzeeland.bbvms.com/json/mediaclip/2896598) https://omroepzeeland.bbvms.com/custom/getDownload?sourceid=${da.embedData.contentId}
