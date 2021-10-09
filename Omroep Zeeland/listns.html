@@ -39,7 +39,6 @@
 	  function sleep(ms) {
 	  	return new Promise(resolve => setTimeout(resolve, ms));
       }
-	  
 	  const ughs = new URL(window.location.href);
 	  let med = ughs.searchParams.get("searchItemType");
 	  if(med){getThem();}

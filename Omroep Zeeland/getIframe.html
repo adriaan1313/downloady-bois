@@ -14,7 +14,6 @@
 		let pub=document.getElementById("pub").value;
 		let o = document.getElementById("o");
 		$.get(pub, data=>{
-		//https://omroepzeeland.bbvms.com/p/regiogrid
 			id=data.split("omroepzeeland.bbvms.com/p/regiogrid")[1].split(".html")[0];
 			$.get("https://omroepzeeland.bbvms.com/p/regiogrid"+id+".js", dat=>{
 				dat = JSON.parse(dat.split("var opts = ")[1].split(";\n\n\t// include bluebillywig script")[0]);
@@ -22,7 +21,9 @@
 					let tmp=document.createElement("video");
 					tmp.controls="on";
 					let srt=document.createElement("source");
-					srt.src=dat.publicationData.defaultMediaAssetPath+dat.clipData.assets[i].src;
+					debugger;
+					if(dat.clipData.assets[i].src.indexOf(dat.publicationData.defaultMediaAssetPath)==-1)srt.src=dat.publicationData.defaultMediaAssetPath+dat.clipData.assets[i].src;
+					else srt.src=dat.clipData.assets[i].src;
 					let tmpp=document.createElement("p");
 					tmpp.innerHTML=dat.clipData.assets[i].jobqid||dat.clipData.assets[i].jobqid||(dat.clipData.assets[i].mediatype.toLowerCase()+"-"+dat.clipData.assets[i].width+"x"+dat.clipData.assets[i].height+"-"+dat.clipData.assets[i].bandwidth)+":";
 					o.appendChild(tmpp);

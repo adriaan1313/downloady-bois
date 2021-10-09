@@ -15,7 +15,7 @@
 		let pub=document.getElementById("pub").value;
 		$.get(pub, d=>{
 			if(d.indexOf("/p/regiogrid/")!=-1){
-				playerScript("https://omroepzeeland.bbvms.com/p/regiogrid/"+d.split("/p/regiogrid/")[1].split(".")[0]+".js");
+				playerScript("https://omroepzeeland.bbvms.com/p/regiogrid"+d.split("/p/regiogrid")[1].split(".")[0]+".js");
 			}else if(d.indexOf("media/bluebillywigplayeroptions")!=-1){
 			$.getJSON(`https://www.omroepzeeland.nl/media/bluebillywigplayeroptions/${d.split("media/bluebillywigplayeroptions/").pop().split(".json")[0]}.json`, da =>{
 				for(i=0; i<da.clipData.assets.length; i++){
@@ -30,7 +30,6 @@
 			});}
 		})
 	}
-	
 	function playerScript(url){
 		$.get(url, dat=>{
 			dat = JSON.parse(dat.split("var opts = ")[1].split(";\n\n\t// include bluebillywig script")[0]);
@@ -39,7 +38,6 @@
 			}
 		});
 	}
-	
 	function addVid(url, q){
 		let tmp=document.createElement("video");
 		tmp.controls="on";

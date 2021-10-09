@@ -14,7 +14,6 @@
 		let pub=document.getElementById("pub").value;
 		let o = document.getElementById("o");
 		$.get(pub, data=>{
-		//iframe src="
 		id=data.split("iframe src=\"/media/player/")[1].split("\"")[0];
 			$.get("https://www.omroepzeeland.nl/media/player/"+id, d=>{
 				$.getJSON(`https://www.omroepzeeland.nl/media/bluebillywigplayeroptions/media/${d.split("media/bluebillywigplayeroptions/media/").pop().split(".json")[0]}.json`, da =>{

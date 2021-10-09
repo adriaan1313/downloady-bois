@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <script src="https://code.jquery.com/jquery-3.5.1.js" charset="utf-8"></script>
-    <title>Omroep Zeeland getter (a)</title>
+    <title>Omroep Zeeland getter (mult)</title>
 	<style>img{display: inline-block;}</style>
   </head>
   <body>
@@ -15,7 +15,7 @@
 		let pub=document.getElementById("pub").value;
 		$.get(pub, d=>{
 			if(d.indexOf("/p/regiogrid/")!=-1){
-				playerScript("https://omroepzeeland.bbvms.com/p/regiogrid/"+d.split("/p/regiogrid/")[1].split(".")[0]+".js");
+				playerScript("https://omroepzeeland.bbvms.com/p/regiogrid"+d.split("/p/regiogrid")[1].split(".")[0]+".js");
 			}else if(d.indexOf("media/bluebillywigplayeroptions")!=-1){
 			$.getJSON(`https://www.omroepzeeland.nl/media/bluebillywigplayeroptions/${d.split("media/bluebillywigplayeroptions/").pop().split(".json")[0]}.json`, da =>{
 				for(i=0; i<da.clipData.assets.length; i++){
@@ -26,26 +26,22 @@
 			});}
 		})
 	}
-	
 	function playerScript(url){
 		$.get(url, dat=>{
 			dat = JSON.parse(dat.split("var opts = ")[1].split(";\n\n\t// include bluebillywig script")[0]);
 			if(dat.clipListData){
 				dat.clipListData.items.forEach(cD=>{
-					//debugger;
 					addFromClipData(cD, dat.publicationData);
 				});
 			}
 			else addFromClipData(dat.clipData, dat.publicationData);
 		});
 	}
-	
 	function addFromClipData(cD, pD){
 		for(j=0; j<cD.assets.length; j++){
 			addVid(pD.defaultMediaAssetPath+cD.assets[j].src, cD.title+": "+(cD.assets[j].jobqid||cD.assets[j].jobqid||(cD.assets[j].mediatype.toLowerCase()+"-"+cD.assets[j].width+"x"+cD.assets[j].height+"-"+cD.assets[j].bandwidth)));
 		}
 	}
-	
 	function addVid(url, q){
 		let tmp=document.createElement("video");
 		tmp.controls="on";
