@@ -19,9 +19,11 @@
 			let id;
 			if(pub.indexOf("/tv/omroep-zeeland-tv/live")!=-1||pub.indexOf("/radio/omroep-zeeland-radio/live")!=-1) id=data.split("\"mobile\",\"tablet\",\"desktop\",\"header\",")[1].split("\"")[1];
 			else if(pub.indexOf("/nieuws/")!=-1)id=data.split(",\"video-asset\"")[0].split(",").pop().split("\"")[1];
-			else id=data.split("\"Contact\",")[1].split(",")[4].split("\"")[1];
-			//console.log(id)
+			else id=data.split("\"singlecolumn\",{},")[1].split("\"")[1];
+			
+			console.log(id)
 			$.get('https://api.allorigins.win/get?url=' + encodeURIComponent("https://omroepzeeland.bbvms.com/p/regiogroei_zeeland_web_videoplayer/c/"+id+".json"), dat=>{
+				console.log(unwrap(dat));
 				dat=JSON.parse(unwrap(dat));
 				if(dat.clipData&&dat.clipData.assets){ //aaaaaaaaaaah why did you have to fuck up your own website, now it can't even show the video
 					for(i=0; i<dat.clipData.assets.length; i++){
