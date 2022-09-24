@@ -34,7 +34,6 @@
 	function getAlbum(pub){
 		const albumID=pub.split("/albums/")[1].split("?")[0];
 		$.getJSON("https://napi.extrememusic.com/albums/"+albumID, da=>{
-			console.log(da);
 			da.track_sounds.forEach(ts=>{
 				if(pub.indexOf("item=")!=-1){
 					const track=pub.split("item=")[1].split("&")[0];
