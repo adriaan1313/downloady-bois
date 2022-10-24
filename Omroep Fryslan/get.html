@@ -15,21 +15,15 @@
 		let pub='https://api.allorigins.win/get?url='+encodeURIComponent(document.getElementById("pub").value);
 		$.get(pub, d=>{
 			d=d.contents;
-			if(d.indexOf("embedURL")!=-1) {
-				
-				a = checkOccurences(d, "embedURL\" content=\"");
-				console.log(a);
-				for(let i=0; i<a; i++){
-					playerJSON(d.split("embedURL\" content=\"")[1+i].split(".html")[0]+".json");
-				}
-			} else {
-				playerScript(d.split("<div id=\"player\">\n    <"+"script src=\"")[1].split("\"")[0]);
-			}
+			console.log(d);
+			if(d.indexOf("\"video\",\"")!=-1) playerScript("https://omropfryslan.bbvms.com/p/regiogroei_fryslan_web_videoplayer/c/"+d.split("\"video\",\"")[1].split("\"")[0]+".js");
+			else if(d.indexOf("\"audio\",\"")!=-1) playerScript("https://omropfryslan.bbvms.com/p/regiogroei_fryslan_web_videoplayer/c/"+d.split("\"audio\",\"")[1].split("\"")[0]+".js");
+			else {/*idfk*/}
 		})
 	}
 	function playerScript(url){
 		$.get(url, dat=>{
-			blueBillyData(JSON.parse(dat.split("var opts = ")[1].split(";\n\n\t// include bluebillywig script")[0]));
+			blueBillyData(dat.split("var opts = ")[1].split(";\n\n\t// include bluebillywig script")[0]);
 		});
 	}
 	function playerJSON(url){
@@ -38,6 +32,7 @@
 		});
 	}
 	function blueBillyData(dat){
+		if(typeof(dat)=="string") dat=JSON.parse(dat);
 		if(dat.clipListData){
 			dat.clipListData.items.forEach(cD=>{
 				addFromClipData(cD, dat.publicationData);
@@ -67,6 +62,11 @@
 	function checkOccurences(string, word) {
 		return string.split(word).length - 1;
 	}
+	parseCP=s=>{
+		if(s.indexOf("regiogroei")==-1){
+			return "https://omropfryslan.bbvms.com/p/regiogroei_fryslan_web_videoplayer/c/"+s.split("mediaclip\\u002F")[1].split("\\u002F")[0]+".js";
+		} else return s;
+	};
     </script>
   </body>
 </html>
